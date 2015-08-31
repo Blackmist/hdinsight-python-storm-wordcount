@@ -2,7 +2,7 @@ This demonstrates a very basic use of Python in a Storm topology. This is based 
 
 ##Prerequisites
 
-* Python 2.6 or 2.7 (tested with 2.7)
+* Python 2.7
 
 * Hadoop with Storm 0.9.3 (tested with both a Linux and Windows based HDInsight cluster.)
 
@@ -19,7 +19,7 @@ JVM
   Spout -> spawns python spout
 
   Bolt(s) -> spawns python bolts
-  
+
 The topology is Java, and at first glance you might think that all the bolts and spouts are Java. But if you look in each of the Java spouts/bolts, you'll see something similar to the following:
 
         public SplitBolt() {
@@ -44,9 +44,9 @@ Data sent between components is serialized as JSON, because you might use a topo
                 <directory>${basedir}/multilang</directory>
             </resource>
         </resources>
-    
+
     Notice that this only specifies the `/multilang` directory and not `/multilang/resources`. Storm seems to expect non-JVM resources in a `resources` directory, so it is looked for internally already. Placing components in this folder allows you to just reference by name in the Java code.
-    
+
 - Python will obviously need to be on all the worker nodes in your cluster. Additionally, if you have modules that your Python code depends on, this must also be installed on all the worker nodes. Storm doesn't provide anything to do this. There are some frameworks that have been created (such as [Streamparse] and [Pyleus],) that handle this for you, in addition to making it generally easier to work with Python and Storm.
 
 ##Running this example
@@ -62,13 +62,13 @@ To run it on a Hadoop cluster, use the following steps:
 1. Build an uber jar:
 
         mvn package
-        
+
 2. Upload the jar file to the Hadoop cluster:
 
         scp WordCount-1.0-SNAPSHOT.jar USERNAME@CLUSTERNAME-ssh.azurehdinsight.net:WordCount-1.0-SNAPSHOT.jar
-        
+
 3. SSH to the cluster and run via the Storm command:
 
         storm jar WordCount-1.0-SNAPSHOT.jar com.microsoft.example.WordCount wordcount
-        
+
 It doesn't do anything useful or fun, but it should run and you can look in the Storm UI to see that it's actually doing stuff.
