@@ -1,3 +1,1 @@
-#Python components in a Storm topology
-
-The two topologies in this repo demonstrate how to use Python components in an Apache Storm topology. See https://azure.microsoft.com/en-us/documentation/articles/hdinsight-storm-develop-python-topology/ for more detailed information on the projects.
+This repository is no longer current. The new location of this project is [https://github.com/Azure-Samples/hdinsight-java-storm-wordcount](https://github.com/Azure-Samples/hdinsight-java-storm-wordcount).
